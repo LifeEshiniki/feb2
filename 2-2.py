@@ -4,16 +4,10 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 #コーパスの利用
-piece = m21.corpus.parse("mozart/k545/movement1_exposition.xml")
+piece = m21.converter.parse("C:/Users/match/PycharmProjects/feb2/senbon.mid")
 
-# 楽譜表示（musescoreやFinaleなどがインストールされていないと動かない、）
-piece.show()
 
-x = None
+sabi_piece = piece[0].measures(38,45)
+sabi_piece.plot("histogram","pitchclass")
 
-for m in piece[2].getElementsByClass('Measure'):
-    for p in m.pitches:
-        if p.name == 'F#':
-            x = m.measureNumber
-            print(m.measureNumber)
-piece[2][x+2].show()#なんで？
+print(sabi_piece.analyze("key"))
